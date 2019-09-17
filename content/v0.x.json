@@ -1,0 +1,27 @@
+[
+  {
+    "section": "Introduction",
+    "expended": true,
+    "topics": [
+      "First steps",
+      "Controllers",
+      "Providers",
+      "Modules"
+    ]
+  },
+  {
+    "section": "Overview",
+    "topics": [
+      "First steps",
+      "Controllers",
+      "Providers",
+      "Modules",
+      "Middleware",
+      "Exception filters",
+      "Pipes",
+      "Guards",
+      "Interceptors",
+      "Custom decorators"
+    ]
+  }
+]

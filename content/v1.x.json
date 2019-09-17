@@ -1,0 +1,59 @@
+[
+  {
+    "section": "Introduction",
+    "expended": true,
+    "topics": [
+      "First steps",
+      "Controllers",
+      "Providers",
+      "Modules"
+    ]
+  },
+  {
+    "section": "Overview",
+    "topics": [
+      "First steps",
+      "Controllers",
+      "Providers",
+      "Modules",
+      "Middleware",
+      "Exception filters",
+      "Pipes",
+      "Guards",
+      "Interceptors",
+      "Custom decorators"
+    ]
+  },
+  {
+    "section": "Fundamentals",
+    "topics": [
+      "Custom providers",
+      "Asynchronous providers",
+      "Circular dependency",
+      "Injection scopes",
+      "Lifecycle events",
+      "Platform agnosticism",
+      "Testing"
+    ]
+  },
+  {
+    "section": "Techniques",
+    "topics": [
+      "Authentication",
+      "Database",
+      "Mongo",
+      "File upload",
+      "Validation",
+      "Caching",
+      "Serialization",
+      "Logger",
+      "Security",
+      "Configuration",
+      "Compression",
+      "HTTP module",
+      "Model-View-Controller",
+      "Performance (Fastify)",
+      "Hot reload (Webpack)"
+    ]
+  }
+]
