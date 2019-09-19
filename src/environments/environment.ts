@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  docsServer: {
+    versionList: 'http://localhost:5000/{language}/version-list.json',
+    versionGroup: 'http://localhost:5000/{language}/{version}.json'
+  }
 };
 
 /*

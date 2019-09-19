@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -13,11 +14,18 @@ export class DocsService {
     this.httpClient = httpClient;
   }
 
-  getVersions() {
-    return this.httpClient.get(`/documentation/version-list.json`);
+  getVersions(language: string) {
+    const url = environment.docsServer.versionList
+      .replace('{language}', language.toLowerCase());
+
+    return this.httpClient.get(url);
   }
 
-  getVersionGroups(version: string) {
-    return this.httpClient.get(`/documentation/${version}.json`);
+  getVersionGroups(language: string, version: string) {
+    const url: string = environment.docsServer.versionGroup
+      .replace('{language}', language.toLowerCase())
+      .replace('{version}', version);
+
+    return this.httpClient.get(url);
   }
 }

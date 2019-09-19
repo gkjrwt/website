@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocsComponent } from './docs.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { DocsRoutingModule } from './docs-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -10,6 +11,7 @@ import { DocsRoutingModule } from './docs-routing.module';
   declarations: [DocsComponent],
   imports: [
     CommonModule,
+    NgbModule,
     MarkdownModule.forRoot(),
     DocsRoutingModule
   ],

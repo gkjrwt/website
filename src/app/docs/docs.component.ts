@@ -21,14 +21,22 @@ export class DocsComponent implements OnInit {
   currentDocsVersion: string;
   docTopicSections = [];
   docTopicLink: string;
+  frameworkLanguages: string[];
+  frameworkLanguage: string;
 
   constructor(docsService: DocsService) {
     this.docsService = docsService;
+    this.frameworkLanguages = [ 'Typescript', 'Javascript' ];
+    this.frameworkLanguage = this.frameworkLanguages[0];
+    this.populateDocs(this.frameworkLanguage);
+  }
 
-    this.docsService.getVersions().subscribe(data => {
+  populateDocs(language: string) {
+    this.docsService.getVersions(language).subscribe(data => {
+      this.frameworkLanguage = language;
       this.docsVersions = <any>data;
       this.currentDocsVersion = this.docsVersions[0];
-      this.docsService.getVersionGroups(this.currentDocsVersion).subscribe(data => {
+      this.docsService.getVersionGroups(this.frameworkLanguage, this.currentDocsVersion).subscribe(data => {
         this.docsGroups = <any>data;
         this.docTopicLink = this.docsGroups[0].topics[0].link;
       });
@@ -36,7 +44,7 @@ export class DocsComponent implements OnInit {
   }
 
   changeDocsVersion(version: string) {
-    this.docsService.getVersionGroups(version).subscribe(data => {
+    this.docsService.getVersionGroups(this.frameworkLanguage, version).subscribe(data => {
       this.currentDocsVersion = version;
       this.docsGroups = <any>data;
     });
@@ -58,11 +66,10 @@ export class DocsComponent implements OnInit {
     }
   }
 
-  onMDError(event) {
-
-  }
+  onMDError(event) {}
 
   changeDocsTopic(topicLink) {
+    this.docTopicSections = [];
     this.docTopicLink = topicLink;
   }
 
