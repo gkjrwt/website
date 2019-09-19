@@ -57,6 +57,8 @@ export class DocsComponent implements OnInit {
       const comments = matched[1];
       let rgxRes;
 
+      this.docTopicSections = [];
+
       while((rgxRes = rgxMarkdownSections.exec(comments)) !== null) {
         this.docTopicSections.push({
           id: rgxRes[1],
@@ -69,7 +71,6 @@ export class DocsComponent implements OnInit {
   onMDError(event) {}
 
   changeDocsTopic(topicLink) {
-    this.docTopicSections = [];
     this.docTopicLink = topicLink;
   }
 
