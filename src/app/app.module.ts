@@ -2,23 +2,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MarkdownModule } from 'ngx-markdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DocsComponent } from './docs/docs.component';
+import { DocsModule } from './docs/docs.module';
+import { LandingModule } from './landing/landing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DocsComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    MarkdownModule.forRoot()
+    LandingModule,
+    DocsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

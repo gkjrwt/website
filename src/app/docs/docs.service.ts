@@ -14,10 +14,10 @@ export class DocsService {
   }
 
   getVersions() {
-    return this.httpClient.get(`/docs/docs-versions.json`);
+    return this.httpClient.get(`/documentation/version-list.json`);
   }
 
   getVersionGroups(version: string) {
-    return this.httpClient.get(`/docs/${version}.json`);
+    return this.httpClient.get(`/documentation/${version}.json`);
   }
 }

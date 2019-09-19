@@ -26,7 +26,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/docs"
+              "src/documentation"
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.css",

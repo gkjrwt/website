@@ -1,1 +1,78 @@
-<p>docs works!</p>
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <img src="/assets/images/brand.svg" alt="NodeArch">
+      <span class="brand-text-1">Node<span class="brand-text-2">Arch</span></span>
+    </a>
+
+    <ul class="navbar-nav mr-auto">
+    </ul>
+
+    <ul class="navbar-nav my-2 my-lg-0 navbar-right-actions">
+      <li ngbDropdown class="nav-item dropdown">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ currentDocsVersion }}
+        </a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" *ngFor="let version of docsVersions; let i = index"
+            (click)="changeDocsVersion(version)">{{ version }}</a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="navbar-right-links">
+      <a href="https://www.npmjs.com/package/@nodearch/core" target="_blank">
+        <i class="fab fa-npm"></i>
+      </a>
+      <a href="https://github.com/nodearch" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+      <div id="left-sidebar" class="sticky-sidebar col-12 col-md-3 col-xl-2 scrollbar-info accordion">
+        <div *ngFor="let docsGroup of docsGroups; let i = index">
+          <button class="btn btn-link docs-group" type="button" data-toggle="collapse"
+            [attr.data-target]="'section' + i" [attr.aria-expanded]="docsGroup.expended"
+            [attr.aria-controls]="'section' + i" (click)="docsGroup.expended = !docsGroup.expended">
+            {{ docsGroup.group }}
+          </button>
+          <i class="fas fa-angle-down"></i>
+
+          <ul [id]="'section' + i" class="list-group collapse" [ngClass]="{ 'show': docsGroup.expended }"
+            aria-labelledby="headingOne" data-parent="#sidenav">
+            <li class="sidenav-topic" *ngFor="let topic of docsGroup.topics; let y = index">
+              <button type="button" class="btn btn-link" (click)="changeDocsTopic(topic.link)">{{ topic.name }}</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="right-sidebar" class="bd-toc d-none d-xl-block col-xl-2">
+        <ul>
+          <li><a href=""><i class="fas fa-edit"></i> Edit this page</a></li>
+          <li><a href=""><i class="fas fa-user-edit"></i> Request docs changes</a></li>
+          <li><a href=""><i class="fas fa-question-circle"></i> Get support</a></li>
+        </ul>
+        <hr>
+        <span class="sections-title">sections on this page:</span>
+        <ul class="sections-list">
+          <li *ngFor="let topicSection of docTopicSections; let x = index">
+            <a class="nav-item" [attr.href]="'docs#' + topicSection.id">{{ topicSection.name }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <main class="col-12 col-md-9 col-xl-8"
+        role="main" markdown lineNumbers
+        [src]="docTopicLink" (load)="onMDLoad($event)" (error)="onMDError($event)">
+      </main>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-copyright">Copyright © 2019 Apache 2.0 by <a href="https://github.com/ahmedali7o1" target="_blank">Ahmed
+        Ali</a></span>
+  </footer>
