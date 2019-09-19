@@ -30,38 +30,49 @@
   </div>
 </nav>
 
-<div id="sidenav" class="scrollbar-info accordion">
-  <div *ngFor="let contentItem of docsList; let i = index">
-    <button class="btn btn-link sidenav-section" type="button" data-toggle="collapse"
-      [attr.data-target]="'section' + i" [attr.aria-expanded]="contentItem.expended"
-      [attr.aria-controls]="'section' + i" (click)="contentItem.expended = !contentItem.expended">
-      {{ contentItem.section }}
-    </button>
-    <i class="fas fa-angle-down"></i>
+<div class="container-fluid">
+  <div class="row flex-xl-nowrap">
+    <div id="left-sidebar" class="sticky-sidebar col-12 col-md-3 col-xl-2 scrollbar-info accordion">
+      <div *ngFor="let docsGroup of docsGroups; let i = index">
+        <button class="btn btn-link docs-group" type="button" data-toggle="collapse"
+          [attr.data-target]="'section' + i" [attr.aria-expanded]="docsGroup.expended"
+          [attr.aria-controls]="'section' + i" (click)="docsGroup.expended = !docsGroup.expended">
+          {{ docsGroup.group }}
+        </button>
+        <i class="fas fa-angle-down"></i>
 
-    <ul [id]="'section' + i" class="list-group collapse" [ngClass]="{ 'show': contentItem.expended }"
-      aria-labelledby="headingOne" data-parent="#sidenav">
-      <li class="sidenav-topic" *ngFor="let topic of contentItem.topics; let y = index"><a href="#">{{ topic }}</a>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <!-- <div class="col-12 col-md-3 col-xl-2"></div>
-
-    <div class="col-12 col-md-8 col-xl-9">
-      <div  markdown [src]="'http://localhost:5000/README.md'" (load)="onLoad($event)"
-      (error)="onError($event)"></div>
+        <ul [id]="'section' + i" class="list-group collapse" [ngClass]="{ 'show': docsGroup.expended }"
+          aria-labelledby="headingOne" data-parent="#sidenav">
+          <li class="sidenav-topic" *ngFor="let topic of docsGroup.topics; let y = index">
+            <button type="button" class="btn btn-link" (click)="changeDocsTopic(topic.link)">{{ topic.name }}</button>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div class="col-12 col-md-1 col-xl-1">
+    <div id="right-sidebar" class="bd-toc d-none d-xl-block col-xl-2">
+      <ul>
+        <li><a href=""><i class="fas fa-edit"></i> Edit this page</a></li>
+        <li><a href=""><i class="fas fa-user-edit"></i> Request docs changes</a></li>
+        <li><a href=""><i class="fas fa-question-circle"></i> Get support</a></li>
+      </ul>
+      <hr>
+      <span class="sections-title">sections on this page:</span>
+      <ul class="sections-list">
+        <li *ngFor="let topicSection of docTopicSections; let x = index">
+          <a class="nav-item" [attr.href]="'#' + topicSection.id">{{ topicSection.name }}</a>
+        </li>
+      </ul>
+    </div>
 
-    </div> -->
-
-    <div class="col-12" markdown [src]="'http://localhost:5000/README.md'" (load)="onLoad($event)"
-      (error)="onError($event)"></div>
-
+    <main class="col-12 col-md-9 col-xl-8"
+      role="main" markdown lineNumbers
+      [src]="docTopicLink" (load)="onMDLoad($event)" (error)="onMDError($event)">
+    </main>
   </div>
 </div>
+
+<footer>
+  <span class="footer-copyright">Copyright © 2019 Apache 2.0 by <a href="https://github.com/ahmedali7o1" target="_blank">Ahmed
+      Ali</a></span>
+</footer>

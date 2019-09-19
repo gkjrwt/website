@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { DocsService } from './docs.service';
 
+const rgxMarkdownComments = new RegExp(/<!--([a-zA-Z:\-\n ]+)-->/);
+const rgxMarkdownSections = new RegExp(/section:([a-zA-Z\-]+):([a-zA-Z ]+)/g);
 
 @Component({
   selector: 'app-root',
@@ -15,31 +17,63 @@ export class AppComponent {
   private docsService: DocsService;
 
   docsVersions: string[];
-  docsList: any[];
+  docsGroups: any[];
   currentDocsVersion: string;
-
+  docTopicSections = [];
+  docTopicLink: string;
 
   constructor(docsService: DocsService) {
     this.docsService = docsService;
 
-    this.docsService.getDocsVersions().subscribe(data => {
+    this.docsService.getVersions().subscribe(data => {
       this.docsVersions = <any>data;
       this.currentDocsVersion = this.docsVersions[0];
-      this.docsService.getDocsList(this.currentDocsVersion).subscribe(data => {
-        this.docsList = <any>data;
+      this.docsService.getVersionGroups(this.currentDocsVersion).subscribe(data => {
+        this.docsGroups = <any>data;
+        this.docTopicLink = this.docsGroups[0].topics[0].link;
       });
     });
   }
 
   changeDocsVersion(version: string) {
-    this.docsService.getDocsList(version).subscribe(data => {
+    this.docsService.getVersionGroups(version).subscribe(data => {
       this.currentDocsVersion = version;
-      this.docsList = <any>data;
+      this.docsGroups = <any>data;
     });
   }
 
+  onMDLoad(event: string) {
+    const matched = event.match(rgxMarkdownComments);
+
+    if(matched) {
+      const comments = matched[1];
+      let rgxRes;
+
+      while((rgxRes = rgxMarkdownSections.exec(comments)) !== null) {
+        this.docTopicSections.push({
+          id: rgxRes[1],
+          name: rgxRes[2]
+        });
+      }
+    }
+  }
+
+  onMDError(event) {
+
+  }
+
+  changeDocsTopic(topicLink) {
+    this.docTopicLink = topicLink;
+  }
+
   ngOnInit() {
-    new PerfectScrollbar('#sidenav', {
+    new PerfectScrollbar('#left-sidebar', {
+      wheelSpeed: 2,
+      wheelPropagation: true,
+      minScrollbarLength: 20
+    });
+
+    new PerfectScrollbar('#right-sidebar', {
       wheelSpeed: 2,
       wheelPropagation: true,
       minScrollbarLength: 20

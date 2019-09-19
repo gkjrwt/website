@@ -1,6 +1,6 @@
 [
   {
-    "section": "Introduction",
+    "group": "Introduction",
     "expended": true,
     "topics": [
       "First steps",
@@ -10,7 +10,7 @@
     ]
   },
   {
-    "section": "Overview",
+    "group": "Overview",
     "topics": [
       "First steps",
       "Controllers",
@@ -25,7 +25,7 @@
     ]
   },
   {
-    "section": "Fundamentals",
+    "group": "Fundamentals",
     "topics": [
       "Custom providers",
       "Asynchronous providers",
@@ -37,7 +37,7 @@
     ]
   },
   {
-    "section": "Techniques",
+    "group": "Techniques",
     "topics": [
       "Authentication",
       "Database",

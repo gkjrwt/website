@@ -1,0 +1,12 @@
+[
+  {
+    "group": "Introduction",
+    "expended": true,
+    "topics": [
+      {
+        "name": "First steps",
+        "link": "/docs/README.md"
+      }
+    ]
+  }
+]

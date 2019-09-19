@@ -13,11 +13,11 @@ export class DocsService {
     this.httpClient = httpClient;
   }
 
-  getDocsVersions() {
-    return this.httpClient.get(`http://localhost:5000/docs-versions.json`);
+  getVersions() {
+    return this.httpClient.get(`/docs/docs-versions.json`);
   }
 
-  getDocsList(version: string) {
-    return this.httpClient.get(`http://localhost:5000/${version}.json`);
+  getVersionGroups(version: string) {
+    return this.httpClient.get(`/docs/${version}.json`);
   }
 }
