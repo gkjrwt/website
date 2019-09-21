@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DocsService } from './docs.service';
 import PerfectScrollbar from 'perfect-scrollbar';
 
-
 const rgxMarkdownComments = new RegExp(/<!--([a-zA-Z:\-\n ]+)-->/);
 const rgxMarkdownSections = new RegExp(/section:([a-zA-Z\-]+):([a-zA-Z ]+)/g);
 

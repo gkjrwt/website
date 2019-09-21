@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "~8.2.4",
     "@angular/router": "~8.2.4",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
+    "@nicky-lenaers/ngx-scroll-to": "^3.0.1",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "ngx-markdown": "^8.1.0",

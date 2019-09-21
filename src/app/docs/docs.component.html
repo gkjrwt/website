@@ -13,8 +13,8 @@
         {{ frameworkLanguage }}
       </a>
       <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="langDropdown">
-          <a class="dropdown-item" style="cursor: pointer" *ngFor="let fwLang of frameworkLanguages; let i = index"
-            (click)="populateDocs(fwLang)">{{ fwLang }}</a>
+        <a class="dropdown-item" style="cursor: pointer" *ngFor="let fwLang of frameworkLanguages; let i = index"
+          (click)="populateDocs(fwLang)">{{ fwLang }}</a>
       </div>
     </li>
 
@@ -53,7 +53,8 @@
         <ul [id]="'section' + i" class="list-group collapse" [ngClass]="{ 'show': docsGroup.expended }"
           aria-labelledby="headingOne" data-parent="#sidenav">
           <li class="sidenav-topic" *ngFor="let topic of docsGroup.topics; let y = index">
-            <button type="button" class="btn btn-link" (click)="changeDocsTopic(topic.link)">{{ topic.name }}</button>
+            <button type="button" class="btn btn-link" [ngClass]="{'menu-item-selected': docTopicLink === topic.link}"
+              (click)="changeDocsTopic(topic.link)">{{ topic.name }}</button>
           </li>
         </ul>
       </div>
@@ -69,12 +70,13 @@
       <span class="sections-title">sections on this page:</span>
       <ul class="sections-list">
         <li *ngFor="let topicSection of docTopicSections; let x = index">
-          <a class="nav-item" [attr.href]="'docs#' + topicSection.id">{{ topicSection.name }}</a>
+          <a class="nav-item" style="cursor: pointer;"
+            [ngx-scroll-to]="'#' + topicSection.id">{{ topicSection.name }}</a>
         </li>
       </ul>
     </div>
 
-    <main class="col-12 col-md-9 col-xl-8" role="main" markdown lineNumbers [src]="docTopicLink"
+    <main class="markdown-container col-12 col-md-9 col-xl-8" role="main" markdown lineNumbers [src]="docTopicLink"
       (load)="onMDLoad($event)" (error)="onMDError($event)">
     </main>
   </div>

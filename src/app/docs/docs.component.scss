@@ -115,7 +115,7 @@ nav {
     list-style: none;
 
     li {
-      padding-bottom: .3rem;
+      padding-bottom: 0.3rem;
 
       .active {
         color: red;
@@ -138,7 +138,7 @@ nav {
   }
 
   .sections-title {
-    font-size: .9rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #99979c;
   }
@@ -209,4 +209,9 @@ footer {
     position: relative;
     top: 1.8rem;
   }
+}
+
+.menu-item-selected {
+  font-weight: bold;
+  color: $color-arch-dark-green !important;
 }

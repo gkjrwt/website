@@ -4,6 +4,7 @@ import { DocsComponent } from './docs.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { DocsRoutingModule } from './docs-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 
 
@@ -13,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     NgbModule,
     MarkdownModule.forRoot(),
+    ScrollToModule.forRoot(),
     DocsRoutingModule
   ],
   entryComponents: [DocsComponent]
