@@ -14,7 +14,7 @@ const rgxextractSlug = new RegExp(/\/([A-Za-z-]+).md/g);
   selector: 'app-docs',
   templateUrl: './docs.component.html',
   styleUrls: ['./docs.component.scss'],
-  providers: [DocsService]
+  providers: []
 })
 export class DocsComponent implements OnInit {
 
@@ -30,7 +30,7 @@ export class DocsComponent implements OnInit {
   private readonly route: ActivatedRoute;
   private readonly router: Router;
 
-  constructor(docsService: DocsService, route: ActivatedRoute, router: Router) {
+  constructor(route: ActivatedRoute, router: Router) {
     this.route = route;
     this.router = router;
     this.docsBaseUrl = environment.docsServer.docsBaseUrl;
@@ -93,7 +93,6 @@ export class DocsComponent implements OnInit {
 
         this.populateDocsGroups();
         this.selectedTopic = this.getFwTopic(params.topic);
-
       });
   }
 
@@ -126,10 +125,13 @@ export class DocsComponent implements OnInit {
   getFwTopic(topic: string) {
     if(topic) {
       let fwTopic;
-
       this.docsGroups.forEach(group => {
-        fwTopic = group.topics.find(t => {
-          return t.slug.toLowerCase() === topic;
+        group.topics.forEach(t => {
+          if(t.slug === topic){
+            fwTopic = t;
+            group.expended = true;
+            return false;
+          }
         });
       });
 
@@ -139,6 +141,10 @@ export class DocsComponent implements OnInit {
       this.navigateDocs(this.selectedFwLang, this.selectedFwVersion);
     }
   }
+
+  // expendTopic() {
+  //   this.selectedTopic
+  // }
 
   getValidParams(params: any) {
     if (!params.fwLanguage) {
@@ -165,8 +171,6 @@ export class DocsComponent implements OnInit {
   }
 
   populateFwVersions() {
-    console.log('this.docsList', this.docsList)
-    console.log('this.selectedFwLang', this.selectedFwLang);
     this.fwVersions = Object.keys(this.docsList[this.selectedFwLang]);
   }
 
@@ -185,7 +189,7 @@ export class DocsComponent implements OnInit {
           const group = fwVersion[groupName];
 
           group.topics.forEach(topic => {
-            const res = (new RegExp(/\/([A-Za-z-]+).md/g)).exec(topic.link);
+            const res = (new RegExp(/\/([A-Za-z-0-9]+).md/g)).exec(topic.link);
             topic.slug = res[1];
           });
         }

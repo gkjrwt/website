@@ -53,7 +53,7 @@
         <ul [id]="'section' + i" class="list-group collapse" [ngClass]="{ 'show': docsGroup.expended }"
           aria-labelledby="headingOne" data-parent="#sidenav">
           <li class="sidenav-topic" *ngFor="let topic of docsGroup.topics; let y = index">
-            <button type="button" class="btn btn-link" [ngClass]="{'menu-item-selected': (selectedTopic? selectedTopic.slug : undefined) === topic.slug}"
+            <button type="button" class="btn btn-link" [ngClass]="{'menu-item-selected': selectedTopic === topic}"
               (click)="navigateDocs(selectedFwLang, selectedFwVersion, topic.slug)">{{ topic.name }}</button>
           </li>
         </ul>
