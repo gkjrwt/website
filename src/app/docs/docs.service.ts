@@ -28,4 +28,8 @@ export class DocsService {
 
     return this.httpClient.get(url);
   }
+
+  getDocsList() {
+    return this.httpClient.get(environment.docsServer.docsList);
+  }
 }

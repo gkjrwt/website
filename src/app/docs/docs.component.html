@@ -10,21 +10,21 @@
   <ul class="navbar-nav my-2 my-lg-0 navbar-right-actions">
     <li ngbDropdown class="nav-item">
       <a ngbDropdownToggle class="nav-link" style="cursor: pointer" id="langDropdown" role="button">
-        {{ frameworkLanguage }}
+        {{ selectedFwLang }}
       </a>
       <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="langDropdown">
-        <a class="dropdown-item" style="cursor: pointer" *ngFor="let fwLang of frameworkLanguages; let i = index"
-          (click)="populateDocs(fwLang)">{{ fwLang }}</a>
+        <a class="dropdown-item" style="cursor: pointer" *ngFor="let fwLangItem of fwLangs; let i = index"
+          (click)="navigateDocs(fwLangItem)">{{ fwLangItem }}</a>
       </div>
     </li>
 
     <li ngbDropdown class="nav-item">
       <a ngbDropdownToggle class="nav-link" style="cursor: pointer" id="docVersionDropdown" role="button">
-        {{ currentDocsVersion }}
+        {{ selectedFwVersion }}
       </a>
       <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="docVersionDropdown">
-        <a class="dropdown-item" style="cursor: pointer" *ngFor="let version of docsVersions; let i = index"
-          (click)="changeDocsVersion(version)">{{ version }}</a>
+        <a class="dropdown-item" style="cursor: pointer" *ngFor="let version of fwVersions; let i = index"
+          (click)="navigateDocs(selectedFwLang, version)">{{ version }}</a>
       </div>
     </li>
   </ul>
@@ -53,8 +53,8 @@
         <ul [id]="'section' + i" class="list-group collapse" [ngClass]="{ 'show': docsGroup.expended }"
           aria-labelledby="headingOne" data-parent="#sidenav">
           <li class="sidenav-topic" *ngFor="let topic of docsGroup.topics; let y = index">
-            <button type="button" class="btn btn-link" [ngClass]="{'menu-item-selected': docTopicLink === topic.link}"
-              (click)="changeDocsTopic(topic.link)">{{ topic.name }}</button>
+            <button type="button" class="btn btn-link" [ngClass]="{'menu-item-selected': (selectedTopic? selectedTopic.slug : undefined) === topic.slug}"
+              (click)="navigateDocs(selectedFwLang, selectedFwVersion, topic.slug)">{{ topic.name }}</button>
           </li>
         </ul>
       </div>
@@ -76,7 +76,7 @@
       </ul>
     </div>
 
-    <main class="markdown-container col-12 col-md-9 col-xl-8" role="main" markdown lineNumbers [src]="docTopicLink"
+    <main class="markdown-container col-12 col-md-9 col-xl-8" role="main" markdown lineNumbers [src]="selectedTopic ? docsBaseUrl + selectedTopic.link : undefined"
       (load)="onMDLoad($event)" (error)="onMDError($event)">
     </main>
   </div>

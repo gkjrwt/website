@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   docsServer: {
     versionList: 'http://localhost:5000/{language}/version-list.json',
-    versionGroup: 'http://localhost:5000/{language}/{version}.json'
+    versionGroup: 'http://localhost:5000/{language}/{version}.json',
+    docsList: 'http://localhost:5000/docs-list.json',
+    docsBaseUrl: 'http://localhost:5000'
   }
 };
 

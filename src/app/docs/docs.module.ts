@@ -5,6 +5,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { DocsRoutingModule } from './docs-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { DocsResolver } from './docs.resolver';
 
 
 
@@ -17,6 +18,11 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     ScrollToModule.forRoot(),
     DocsRoutingModule
   ],
+  providers: [
+    DocsResolver
+  ],
   entryComponents: [DocsComponent]
 })
-export class DocsModule { }
+export class DocsModule {
+
+}
